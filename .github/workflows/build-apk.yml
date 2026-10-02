@@ -28,7 +28,7 @@ jobs:
           channel: 'stable'
           cache: true
 
-      - name: Fix Android SDK Settings & Permissions
+      - name: Accept Android Licenses & Fix Permissions
         run: |
           yes | flutter doctor --android-licenses || true
           if [ -f "android/gradlew" ]; then
@@ -37,7 +37,6 @@ jobs:
           # shared_preferences এর জন্য minSdkVersion 21 নিশ্চিত করা
           find android/ -name "build.gradle*" -exec sed -i 's/minSdkVersion [0-9]*/minSdkVersion 21/g' {} + || true
           find android/ -name "build.gradle*" -exec sed -i 's/minSdkVersion flutter.minSdkVersion/minSdkVersion 21/g' {} + || true
-          # ডিফল্ট টেস্ট ফাইল থাকলে তা বিল্ডে প্রভাব ফেলা বন্ধ করা
           rm -rf test/
 
       - name: Install dependencies
