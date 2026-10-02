@@ -356,31 +356,31 @@ class _HabitAppRootState extends State<_HabitAppRoot> {
             title: 'TrackHabit Web',
             debugShowCheckedModeBanner: false,
             themeMode: _state.themeMode,
-            theme: ThemeData(
+                        theme: ThemeData(
               useMaterial3: true,
               brightness: Brightness.light,
               colorSchemeSeed: _state.accentColor,
               scaffoldBackgroundColor: const Color(0xFFF8FAFC),
-              cardTheme: CardTheme(
+              cardTheme: CardThemeData(
                 elevation: 0,
                 shape: shape,
                 color: Colors.white,
                 margin: EdgeInsets.zero,
               ),
-              dialogTheme: DialogTheme(shape: shape),
+              dialogTheme: DialogThemeData(shape: shape),
             ),
             darkTheme: ThemeData(
               useMaterial3: true,
               brightness: Brightness.dark,
               colorSchemeSeed: _state.accentColor,
               scaffoldBackgroundColor: const Color(0xFF0F172A),
-              cardTheme: CardTheme(
+              cardTheme: CardThemeData(
                 elevation: 0,
                 shape: shape,
                 color: const Color(0xFF1E293B),
                 margin: EdgeInsets.zero,
               ),
-              dialogTheme: DialogTheme(shape: shape),
+              dialogTheme: DialogThemeData(shape: shape),
             ),
             home: const AppShell(),
           ),
