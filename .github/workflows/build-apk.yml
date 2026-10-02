@@ -1,45 +1,35 @@
+name: Build Android APK
+​on:
+push:
+branches: [ main, master ]
+pull_request:
+branches: [ main, master ]
+workflow_dispatch:
+​jobs:
+build:
 name: Build Flutter APK
-
-on:
-  push:
-    branches:
-      - main  # অথবা আপনার ডিফল্ট ব্রাঞ্চের নাম (যেমন master)
-  workflow_dispatch: # এটি রাখলে গিটহাবে একটি বাটনে চাপ দিয়ে ম্যানুয়ালিও বিল্ড শুরু করা যায়
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      # ১. রিপোজিটরি ক্লোন করা
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      # ২. জাভা এনভায়রনমেন্ট সেটআপ
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-
-      # ৩. Flutter SDK সেটআপ
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          cache: true
-
-      # ৪. প্যাকেজ ডিপেনডেন্সি ইনস্টল করা
-      - name: Install Dependencies
-        run: flutter pub get
-
-      # ৫. APK বিল্ড করা
-      - name: Build APK
-        run: flutter build apk --split-per-abi
-
-      # ৬. তৈরি হওয়া APK সেভ/আপলোড করা
-      - name: Upload APK Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-apk
-          path: build/app/outputs/flutter-apk/*.apk
+runs-on: ubuntu-latest
+​steps:
+- name: Checkout Code
+uses: actions/checkout@v4
+​- name: Set up Java (JDK 17)
+uses: actions/setup-java@v4
+with:
+distribution: 'temurin'
+java-version: '17'
+cache: 'gradle'
+​- name: Set up Flutter
+uses: subosito/flutter-action@v2
+with:
+channel: 'stable'
+cache: true
+​- name: Install Dependencies
+run: flutter pub get
+​- name: Build Release APK
+run: flutter build apk --release
+​- name: Upload APK Artifact
+uses: actions/upload-artifact@v4
+with:
+name: habit-flow-release-apk
+path: build/app/outputs/flutter-apk/app-release.apk
+if-no-files-found: error
