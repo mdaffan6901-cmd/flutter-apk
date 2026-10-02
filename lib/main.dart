@@ -152,7 +152,7 @@ class AppState extends ChangeNotifier {
     final list = habits.map((h) => h.toJson()).toList();
     await _prefs.setString('habits_data', jsonEncode(list));
     await _prefs.setString('theme_mode', themeMode.name);
-    await _prefs.setInt('accent_color', accentColor.toARGB32());
+    await _prefs.setInt('accent_color', accentColor.value);
     await _prefs.setDouble('corner_radius', cornerRadius);
     await _prefs.setInt('week_start', weekStartDay);
     await _prefs.setBool('notifications', notificationsEnabled);
