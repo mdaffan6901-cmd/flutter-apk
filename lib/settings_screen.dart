@@ -68,7 +68,7 @@ class SettingsScreen extends StatelessWidget {
                                       child: CircleAvatar(
                                         radius: 14,
                                         backgroundColor: c,
-                                        child: state.accentColor.toARGB32() == c.toARGB32()
+                                        child: state.accentColor.value == c.value
                                             ? const Icon(Icons.check, size: 16, color: Colors.white)
                                             : null,
                                       ),
